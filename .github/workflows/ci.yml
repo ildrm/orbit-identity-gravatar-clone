@@ -1,0 +1,79 @@
+name: Build and behavior gates
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.21.0
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm test
+      - run: node scripts/specification-check.mjs
+      - run: node scripts/verify-sdk-packages.mjs
+      - run: python3 -m unittest discover -s integrations/python -p 'test_*.py'
+      - run: php -l integrations/php/IdentityClient.php
+      - run: php -l integrations/wordpress/orbit-identity.php
+      - run: php -l integrations/wordpress/advanced.php
+      - run: node scripts/configure.mjs
+      - run: docker compose up -d --build
+      - run: node scripts/postgres-image-test.mjs
+      - run: node --env-file=.env scripts/wait-ready.mjs
+      - run: npm run test:integration
+      - run: npm run test:authorization
+      - run: node --env-file=.env scripts/openapi-check.mjs
+      - run: node --env-file=.env scripts/wait-auth-window.mjs
+      - run: npm run test:advanced
+      - run: node --env-file=.env scripts/wait-auth-window.mjs
+      - run: npm run test:trust
+      - run: npm run test:operations
+      - run: node scripts/fault-suite.mjs
+      - run: node scripts/download-wordpress.mjs
+      - run: python3 scripts/extract-wordpress.py
+      - run: node scripts/wordpress-runtime.mjs
+      - run: docker compose -f compose.yml -f compose.tls.yml build tls-edge
+      - run: npm run test:tls
+      - run: npm run test:restore
+      - run: node --env-file=.env scripts/full-backup-test.mjs
+      - run: node --env-file=.env scripts/encrypted-backup-test.mjs
+      - run: node --env-file=.env scripts/migration-test.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: node --env-file=.env scripts/wait-auth-window.mjs
+      - run: npm run test:e2e
+      - run: node --env-file=.env scripts/load-smoke.mjs
+      - run: node --env-file=.env scripts/resilience.mjs
+      - run: node scripts/security-scan.mjs
+      - run: node scripts/image-evidence.mjs
+      - run: node scripts/prepare-release.mjs
+      - run: node --env-file=.env scripts/verify-release.mjs
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: always()
+        with:
+          name: validation-evidence
+          path: |
+            test-results/
+            playwright-report/
+            reports/*.json
+            reports/release/compose.release.json
+            reports/release/compose.tls.release.json
+            docs/operations/image-manifest.json
+            docs/operations/release-manifest.json
+          retention-days: 7
+      - run: docker compose down
+        if: always()

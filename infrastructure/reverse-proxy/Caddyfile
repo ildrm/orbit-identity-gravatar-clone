@@ -1,0 +1,14 @@
+# Host Caddy forwards to loopback-only Compose ports.
+# Provide ORBIT_PUBLIC_HOST, ORBIT_ADMIN_HOST and ORBIT_STORAGE_HOST to Caddy.
+{$ORBIT_PUBLIC_HOST} {
+  header Strict-Transport-Security "max-age=31536000"
+  reverse_proxy 127.0.0.1:8080
+}
+{$ORBIT_ADMIN_HOST} {
+  header Strict-Transport-Security "max-age=31536000"
+  reverse_proxy 127.0.0.1:8081
+}
+{$ORBIT_STORAGE_HOST} {
+  header Strict-Transport-Security "max-age=31536000"
+  reverse_proxy 127.0.0.1:9000
+}

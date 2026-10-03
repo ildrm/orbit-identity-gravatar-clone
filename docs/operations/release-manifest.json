@@ -1,0 +1,107 @@
+{
+  "preparedAt": "2026-10-03T00:18:05.233Z",
+  "version": "1.0.0",
+  "sourceHash": "79c51742695f819f8bcd7c82e1135b82b266cb2be104665493a246d8845e8053",
+  "evidence": [
+    {
+      "path": "reports/security-summary.json",
+      "sha256": "ebb265f1b261d4c5e02bea035c2b75ca6a3c9cec0cfa051931f452acb86639f3"
+    },
+    {
+      "path": "reports/fault-suite.json",
+      "sha256": "ec601c4355307fd654cade42737ed1d7c20456764e193c74257e26d08cc4e099"
+    },
+    {
+      "path": "reports/performance.json",
+      "sha256": "15ae24ba1fabb98b38254090846c06b7f7704d6ed11d9b3bea215ec5ea495eaf"
+    },
+    {
+      "path": "reports/wordpress-runtime.json",
+      "sha256": "f079a6566125b5e2e61707e3b742cd79ebe91693a2b56029e9627da6c28fe6fc"
+    },
+    {
+      "path": "reports/tls-rehearsal.json",
+      "sha256": "e40ffe04b7fa9d404395dfd930da3ca4a207ebd7a0bb1ec240267360f9c39be7"
+    },
+    {
+      "path": "reports/openapi-contracts.json",
+      "sha256": "a1118c2cbf696e39b2eaea5e713e565e20693a566610fb7768edc1a03eef76d7"
+    },
+    {
+      "path": "reports/full-backup-restore.json",
+      "sha256": "3b25cc2992f327f0d1400585e399ed2fcf61f8fa9e15d9e51e5685aa01911795"
+    },
+    {
+      "path": "reports/e2e.json",
+      "sha256": "0e740b49c22661eef08f88fc6a5697d02fadbcb9e0b87968768471f56493b093"
+    }
+  ],
+  "scope": "Prepared immutable local image tags. No registry publication, external deployment or signing has been performed.",
+  "images": [
+    {
+      "service": "api",
+      "tag": "orbit-identity/api:1.0.0-79c51742695f",
+      "imageId": "sha256:f8c562b2a531aa61c64887e8bafd39eb397b32360de0d9f938a072b49c5b5fab"
+    },
+    {
+      "service": "worker",
+      "tag": "orbit-identity/worker:1.0.0-79c51742695f",
+      "imageId": "sha256:f8c562b2a531aa61c64887e8bafd39eb397b32360de0d9f938a072b49c5b5fab"
+    },
+    {
+      "service": "scheduler",
+      "tag": "orbit-identity/scheduler:1.0.0-79c51742695f",
+      "imageId": "sha256:f8c562b2a531aa61c64887e8bafd39eb397b32360de0d9f938a072b49c5b5fab"
+    },
+    {
+      "service": "delivery",
+      "tag": "orbit-identity/delivery:1.0.0-79c51742695f",
+      "imageId": "sha256:f8c562b2a531aa61c64887e8bafd39eb397b32360de0d9f938a072b49c5b5fab"
+    },
+    {
+      "service": "migrate",
+      "tag": "orbit-identity/migrate:1.0.0-79c51742695f",
+      "imageId": "sha256:f8c562b2a531aa61c64887e8bafd39eb397b32360de0d9f938a072b49c5b5fab"
+    },
+    {
+      "service": "storage-init",
+      "tag": "orbit-identity/storage-init:1.0.0-79c51742695f",
+      "imageId": "sha256:f8c562b2a531aa61c64887e8bafd39eb397b32360de0d9f938a072b49c5b5fab"
+    },
+    {
+      "service": "web",
+      "tag": "orbit-identity/web:1.0.0-79c51742695f",
+      "imageId": "sha256:df4293ed38137d40beea0d80f4a27cb1a72de5220f0a70feeea1841b5219f99e"
+    },
+    {
+      "service": "admin",
+      "tag": "orbit-identity/admin:1.0.0-79c51742695f",
+      "imageId": "sha256:e0aec64aa85cd35f25363175b90facce7b94cfdb65fc9841f0a59f31ea8afcad"
+    },
+    {
+      "service": "postgres",
+      "tag": "orbit-identity/postgres:1.0.0-79c51742695f",
+      "imageId": "sha256:d04320f724a1fb7035ec103faaed800bd8b306df85e2859e437137f2cc90a916"
+    },
+    {
+      "service": "reverse-proxy",
+      "tag": "orbit-identity/reverse-proxy:1.0.0-79c51742695f",
+      "imageId": "sha256:24c4dfbdf80689ea02bb1ca2a0cd08bd600b978d9aa171471f715333f13d08a2"
+    },
+    {
+      "service": "tls-edge",
+      "tag": "orbit-identity/tls-edge:1.0.0-79c51742695f",
+      "imageId": "sha256:bef69b93d11694a6e34e78da9cc1129730ccd79a340370d1f9cd16dbc0f72666"
+    },
+    {
+      "service": "redis",
+      "tag": "orbit-identity/redis:1.0.0-79c51742695f",
+      "imageId": "sha256:3811787313eba226a2ef38658c6ccb91cd5e110edc89c37767de373120a0e5a0"
+    },
+    {
+      "service": "object-storage",
+      "tag": "orbit-identity/object-storage:1.0.0-79c51742695f",
+      "imageId": "sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d"
+    }
+  ]
+}

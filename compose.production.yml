@@ -1,0 +1,33 @@
+# Run behind an HTTPS terminator; all published ports remain loopback-only.
+x-production-environment: &production-environment
+  NODE_ENV: production
+  PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:?Set the HTTPS public origin}
+  ADMIN_ORIGIN: ${ADMIN_ORIGIN:?Set the HTTPS admin origin}
+  RP_ID: ${RP_ID:?Set the public hostname}
+  S3_PUBLIC_ENDPOINT: ${S3_PUBLIC_ENDPOINT:?Set the HTTPS S3 endpoint}
+  SMTP_HOST: ${SMTP_HOST:?Set a real SMTP host}
+  SMTP_PORT: ${SMTP_PORT:-465}
+  SMTP_SECURE: ${SMTP_SECURE:-true}
+  SMTP_USER: ${SMTP_USER:-}
+  SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+  EMAIL_FROM: ${EMAIL_FROM:?Set the verified sender address}
+services:
+  api:
+    environment: *production-environment
+  delivery:
+    environment: *production-environment
+  worker:
+    environment: *production-environment
+  scheduler:
+    environment: *production-environment
+  migrate:
+    environment: *production-environment
+  storage-init:
+    environment: *production-environment
+  web:
+    environment:
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN}
+      S3_PUBLIC_ENDPOINT: ${S3_PUBLIC_ENDPOINT}
+  admin:
+    environment:
+      PUBLIC_ORIGIN: ${ADMIN_ORIGIN}

@@ -1,0 +1,25 @@
+{
+  email {$TLS_EMAIL}
+  on_demand_tls {
+    ask http://api:4000/internal/custom-domains/authorize
+  }
+}
+{$ORBIT_PUBLIC_HOST} {
+  header Strict-Transport-Security "max-age=31536000"
+  reverse_proxy reverse-proxy:80
+}
+{$ORBIT_ADMIN_HOST} {
+  header Strict-Transport-Security "max-age=31536000"
+  reverse_proxy reverse-proxy:81
+}
+{$ORBIT_STORAGE_HOST} {
+  header Strict-Transport-Security "max-age=31536000"
+  reverse_proxy object-storage:9000
+}
+:443 {
+  tls {
+    on_demand
+  }
+  header Strict-Transport-Security "max-age=31536000"
+  reverse_proxy reverse-proxy:80
+}

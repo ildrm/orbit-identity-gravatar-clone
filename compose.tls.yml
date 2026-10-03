@@ -1,0 +1,27 @@
+# Add to compose.yml and compose.production.yml on a server with public DNS.
+services:
+  tls-edge:
+    image: identity-platform-tls
+    build: { context: ., dockerfile: infrastructure/docker/tls.Dockerfile }
+    restart: unless-stopped
+    environment:
+      TLS_EMAIL: ${TLS_EMAIL:?Set the ACME account email}
+      ORBIT_PUBLIC_HOST: ${ORBIT_PUBLIC_HOST:?Set the public DNS hostname}
+      ORBIT_ADMIN_HOST: ${ORBIT_ADMIN_HOST:?Set the moderator DNS hostname}
+      ORBIT_STORAGE_HOST: ${ORBIT_STORAGE_HOST:?Set the storage DNS hostname}
+    ports: ['80:80', '443:443', '443:443/udp']
+    volumes:
+      - ./infrastructure/reverse-proxy/Caddyfile.container:/etc/caddy/Caddyfile:ro
+      - tls-data:/data
+      - tls-config:/config
+    depends_on:
+      api: { condition: service_healthy }
+      reverse-proxy: { condition: service_healthy }
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    security_opt: [no-new-privileges:true]
+volumes:
+  tls-data:
+  tls-config:

@@ -1,0 +1,4 @@
+CREATE TABLE notification_preferences(account_id text PRIMARY KEY REFERENCES accounts(id),in_app boolean NOT NULL DEFAULT true,email boolean NOT NULL DEFAULT false);
+CREATE TABLE notifications(id text PRIMARY KEY,account_id text NOT NULL REFERENCES accounts(id),identity_id text REFERENCES identities(id),kind text NOT NULL,created_at timestamptz NOT NULL DEFAULT now(),read_at timestamptz);
+CREATE INDEX notifications_account ON notifications(account_id,created_at DESC);
+CREATE TABLE schema_definitions(key text PRIMARY KEY,version integer NOT NULL DEFAULT 1,type text NOT NULL CHECK(type IN ('text','number','boolean','https_url','text_array')),title text NOT NULL,description text NOT NULL,max_length integer NOT NULL DEFAULT 200 CHECK(max_length BETWEEN 1 AND 2000),localized boolean NOT NULL DEFAULT false,indexable boolean NOT NULL DEFAULT false,revoked_at timestamptz,registered_by text NOT NULL REFERENCES accounts(id),created_at timestamptz NOT NULL DEFAULT now());

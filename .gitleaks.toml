@@ -1,0 +1,14 @@
+title = "Orbit Identity source scanning"
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Ignored dependencies, builds, local runtime secrets and test output"
+paths = [
+  '''(^|[\\/])(node_modules|dist|\.next|data|backups|reports|test-results|playwright-report|\.git)([\\/]|$)''',
+  '''(^|[\\/])\.env$''',
+]
+
+[[allowlists]]
+description = "Static environment member expression, not a credential value"
+regexes = ['''^(vars|env)\.S3_SECRET_KEY$''']

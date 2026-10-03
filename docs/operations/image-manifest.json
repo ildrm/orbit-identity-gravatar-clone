@@ -1,0 +1,70 @@
+{
+  "capturedAt": "2026-10-03T00:16:16.050Z",
+  "scope": "Local built images; not a signed or approved production release",
+  "images": [
+    {
+      "service": "api",
+      "image": "identity-platform-api",
+      "imageId": "sha256:f8c562b2a531aa61c64887e8bafd39eb397b32360de0d9f938a072b49c5b5fab",
+      "createdAt": "2026-10-02T23:27:15.892717066Z",
+      "scannedAt": "2026-10-03T00:13:19.782173445Z",
+      "highCriticalFindings": 0
+    },
+    {
+      "service": "web",
+      "image": "identity-platform-web",
+      "imageId": "sha256:df4293ed38137d40beea0d80f4a27cb1a72de5220f0a70feeea1841b5219f99e",
+      "createdAt": "2026-10-03T00:11:38.096397301Z",
+      "scannedAt": "2026-10-03T00:13:27.032599809Z",
+      "highCriticalFindings": 0
+    },
+    {
+      "service": "admin",
+      "image": "identity-platform-admin",
+      "imageId": "sha256:e0aec64aa85cd35f25363175b90facce7b94cfdb65fc9841f0a59f31ea8afcad",
+      "createdAt": "2026-10-02T21:53:57.650497876Z",
+      "scannedAt": "2026-10-03T00:13:28.102095521Z",
+      "highCriticalFindings": 0
+    },
+    {
+      "service": "postgres",
+      "image": "identity-platform-postgres",
+      "imageId": "sha256:d04320f724a1fb7035ec103faaed800bd8b306df85e2859e437137f2cc90a916",
+      "createdAt": "2026-10-02T11:22:56.694375609Z",
+      "scannedAt": "2026-10-03T00:13:29.169368843Z",
+      "highCriticalFindings": 0
+    },
+    {
+      "service": "redis",
+      "image": "redis:8.10.2-alpine",
+      "imageId": "sha256:3811787313eba226a2ef38658c6ccb91cd5e110edc89c37767de373120a0e5a0",
+      "createdAt": "2026-09-21T17:37:00.659434515Z",
+      "scannedAt": "2026-10-03T00:13:30.35364261Z",
+      "highCriticalFindings": 0
+    },
+    {
+      "service": "storage",
+      "image": "chrislusf/seaweedfs:4.48",
+      "imageId": "sha256:4e61d15fd35994cb1e43e1e553dff106794841fd9a99ade2fc8c8bfce4d7872d",
+      "createdAt": "2026-09-28T18:41:21.744952814Z",
+      "scannedAt": "2026-10-03T00:13:31.743296218Z",
+      "highCriticalFindings": 0
+    },
+    {
+      "service": "proxy",
+      "image": "identity-platform-proxy",
+      "imageId": "sha256:24c4dfbdf80689ea02bb1ca2a0cd08bd600b978d9aa171471f715333f13d08a2",
+      "createdAt": "2026-10-02T11:12:21.421972338Z",
+      "scannedAt": "2026-10-03T00:13:32.919897041Z",
+      "highCriticalFindings": 0
+    },
+    {
+      "service": "tls",
+      "image": "identity-platform-tls",
+      "imageId": "sha256:bef69b93d11694a6e34e78da9cc1129730ccd79a340370d1f9cd16dbc0f72666",
+      "createdAt": "2026-10-02T16:20:27.879876651Z",
+      "scannedAt": "2026-10-03T00:13:34.022266997Z",
+      "highCriticalFindings": 0
+    }
+  ]
+}

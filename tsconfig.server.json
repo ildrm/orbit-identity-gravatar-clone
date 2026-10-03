@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "rootDir": ".",
+    "outDir": "dist",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "include": [
+    "apps/api/src/**/*.ts",
+    "apps/delivery/src/**/*.ts",
+    "apps/worker/src/**/*.ts",
+    "apps/scheduler/src/**/*.ts",
+    "packages/core/src/**/*.ts",
+    "packages/contracts/src/**/*.ts"
+  ],
+  "exclude": ["node_modules", "tests"]
+}

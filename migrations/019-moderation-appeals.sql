@@ -1,0 +1,3 @@
+CREATE TABLE moderation_appeals(id text PRIMARY KEY,report_id text NOT NULL REFERENCES reports(id),identity_id text NOT NULL REFERENCES identities(id),account_id text NOT NULL REFERENCES accounts(id),reason text NOT NULL,state text NOT NULL DEFAULT 'OPEN' CHECK(state IN ('OPEN','UPHELD','OVERTURNED')),reviewer_id text REFERENCES accounts(id),disposition text,created_at timestamptz NOT NULL DEFAULT now(),reviewed_at timestamptz);
+CREATE UNIQUE INDEX one_open_appeal ON moderation_appeals(report_id) WHERE state='OPEN';
+CREATE TABLE blocked_link_hosts(host text PRIMARY KEY,reason text NOT NULL,actor_id text NOT NULL REFERENCES accounts(id),created_at timestamptz NOT NULL DEFAULT now());

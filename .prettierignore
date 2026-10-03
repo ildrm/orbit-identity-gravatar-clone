@@ -1,0 +1,6 @@
+package-lock.json
+docs/product/original-prompt.md
+.next
+dist
+node_modules
+data

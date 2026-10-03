@@ -1,0 +1,13 @@
+# Monitoring and incident response
+
+Enable the optional metrics collector with docker compose --profile observability up -d prometheus. Prometheus is pinned by image digest and binds only loopback port 9090. API, delivery, worker and scheduler metrics remain on the private Docker network; the public reverse proxy denies /metrics. Validate configuration and six alert rules using the pinned image's promtool.
+
+Monitor readiness, process CPU/memory, HTTP status and latency, delivery avatar/asset latency, job counts by bounded state, due queue age, database pool waiters and worker/scheduler heartbeat age. Alerts cover service downtime, API server errors above 2%, dead jobs, due queue delay above five minutes, stale heartbeat and persistent pool pressure. Configure your Alertmanager/notification destination in deployment infrastructure; no external alerts are sent by the local development stack.
+
+Initial service objectives are API/delivery availability 99.9%, valid ordinary API p95 below 500 ms, avatar delivery p95 below 200 ms after byte-cache warm-up, and normal queue completion within 60 seconds. These are operational targets, not measured production guarantees. Record actual load evidence before changing limits. Keep IDs, email addresses, handles, credential contents and arbitrary URLs out of metric labels.
+
+On failure: check /health/ready, private per-service /health and /metrics, then database/Redis/storage/SMTP availability. Use correlation IDs and sanitized logs. Review DEAD job metadata; fix the dependency before explicitly replaying a selected delivery. Worker leases support interruption recovery; scheduler advisory locking prevents duplicate scheduling. Do not reset authentication quotas to make tests pass.
+
+For storage exhaustion, stop writes and build jobs, recover capacity without deleting named volumes, restart affected services and verify PostgreSQL WAL recovery and object checksums. Docker Desktop's backing Windows drive needs free space independently of the project drive. Preserve database and object volumes; do not use a factory reset as a build fix. Build application images sequentially on constrained workstations.
+
+Restore encrypted backups into a new isolated database/bucket first. Verify schema version, ownership constraints, media hashes and encrypted secret/key readability using the separately protected application encryption keys. Switch production traffic only after readiness and privacy checks. Old backups contain old private states: prevent contact, provider sync, OAuth grants and federation side effects until the recovered system has been reconciled with deletion/revocation history.

@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orbit-identity"
+version = "1.0.0"
+description = "Policy-aware Orbit Identity REST client"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-2.0-only"
+
+[tool.setuptools]
+py-modules = ["orbit_identity"]

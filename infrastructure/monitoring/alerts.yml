@@ -1,0 +1,41 @@
+groups:
+  - name: orbit-service-health
+    rules:
+      - alert: OrbitServiceUnavailable
+        expr: up{job=~"identity-.*"} == 0
+        for: 2m
+        labels: { severity: critical }
+        annotations:
+          summary: "An Orbit service is unavailable"
+          description: "Inspect readiness, database/Redis connectivity and service logs using the operations runbook."
+      - alert: OrbitHighServerErrorRate
+        expr: sum(rate(identity_http_requests_total{status=~"5.."}[5m])) / clamp_min(sum(rate(identity_http_requests_total[5m])), 1) > 0.02
+        for: 5m
+        labels: { severity: critical }
+        annotations:
+          summary: "More than 2% of API requests fail with server errors"
+      - alert: OrbitDeadJobs
+        expr: identity_jobs{state="DEAD"} > 0
+        for: 2m
+        labels: { severity: warning }
+        annotations:
+          summary: "A durable job exhausted its retry budget"
+          description: "Review sanitized job metadata, resolve the dependency failure, then replay only the intended job."
+      - alert: OrbitQueueDelay
+        expr: identity_queue_lag_seconds > 300
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "Due jobs have waited more than five minutes"
+      - alert: OrbitStaleHeartbeat
+        expr: identity_heartbeat_age_seconds > 120
+        for: 2m
+        labels: { severity: critical }
+        annotations:
+          summary: "Worker or scheduler progress has stopped"
+      - alert: OrbitDatabasePoolPressure
+        expr: identity_database_pool_waiting > 0
+        for: 5m
+        labels: { severity: warning }
+        annotations:
+          summary: "Database connection pool is persistently saturated"

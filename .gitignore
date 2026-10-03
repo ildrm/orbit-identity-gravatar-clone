@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.tsbuildinfo
+node_modules/
+.next/
+dist/
+coverage/
+test-results/
+playwright-report/
+.env
+.env.*
+!.env.example
+data/
+*.log
+backups/
+reports/
