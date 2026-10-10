@@ -39,7 +39,7 @@
     "test:restore": "node --env-file=.env scripts/backup-restore-test.mjs"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.1145.0",
+    "@aws-sdk/client-s3": "3.1147.0",
     "@aws-sdk/s3-request-presigner": "3.1145.0",
     "@nestjs/common": "12.1.2",
     "@nestjs/core": "12.1.2",
