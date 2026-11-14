@@ -1,4 +1,4 @@
-FROM golang:1.27.1-alpine3.24@sha256:8a5910f31396cd4d89662f56c68b3ae31d374308270a1c3bd96672ee5ed43414 AS build
+FROM golang:1.27.4-alpine3.24@sha256:0a5f7fe796599ff487605987432e7619ae45beeb2fba4c2ce0b907879932aebf AS build
 ENV CGO_ENABLED=0 GOTOOLCHAIN=local
 ARG GOPROXY=https://proxy.golang.org|https://goproxy.io|https://goproxy.cn,direct
 ENV GOPROXY=$GOPROXY
